@@ -1,0 +1,14 @@
+all operation in map is of O(logN);
+
+count()  ->  O(N);
+
+erase() in string and vector also -> O(N); N is size
+in map Or set : erase(a,b) -> O(O(s.find(num))) or O(1) or O(a,b);
+
+clear() -> O(N);
+
+inserting in vector push_back(x) -> O(1);
+inserting in set push_back(x) -> O(log(N)); N is current size
+
+
+upper_bound() && lower_bound() --> O(log(N));

@@ -1,0 +1,24 @@
+1. Try to write function in terms of the function like
+
+ -> fibonacy : fib(n)=fib(n-1)+fib(n-2); then
+               return fib(n-1)+fib(n-2);
+
+ -> factorial : fact(n)=fact(n-1)*n;
+                return fact(n-1)*n;
+
+2. Then write base condition to break;
+ 
+ -> for fibo : if(n==1) return 1, if(n==0) return 0;
+ -> for fact : if(n==1) return 1;
+
+
+            How recursion work
+
+for every recurion call function store in stack like
+ 
+==> in fibo(5)
+     fib(4),fib(3),fib(2),......
+     similarly in order of function call it store in stack 
+     and return all in order from top and execute the remaining code below the function
+
+    

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Freight Tracker</title>
+  <style>
+    /* Style for the search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+    .search-bar input[type="text"] {
+      flex: 1;
+      padding: 5px;
+    }
+    .search-bar input[type="submit"] {
+      margin-left: 10px;
+      padding: 5px 10px;
+    }
+    /* Style for the map */
+    .map {
+      width: 100%;
+      height: 400px;
+    }
+    /* Style for the recent trackings list */
+    .recent-trackings {
+      margin-top: 10px;
+    }
+    .recent-trackings ul {
+      list-style: none;
+      padding: 0;
+    }
+    .recent-trackings ul li {
+      padding: 5px;
+      cursor: pointer;
+    }
+    .recent-trackings ul li:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Freight Tracker</h1>
+  <div class="search-bar">
+    <form id="search-form">
+      <input type="text" placeholder="Enter a tracking number or reference number">
+      <input type="submit" value="Search">
+    </form>
+  </div>
+  <div id="map" class="map"></div>
+  <div class="recent-trackings">
+    <h2>Recent trackings</h2>
+    <ul id="recent-trackings-list">
+      <li>Tracking 12345 (In transit)</li>
+      <li>Tracking 67890 (Delivered)</li>
+      <li>Tracking 54321 (Delayed)</li>
+    </ul>
+  </div>
+  <script>
+    // Initialize the map
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8
+    });
+
+    // Add event listener to the search form
+    const searchForm = document.getElementById('search-form');
+    searchForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      // Get the search query
+      const query = searchForm.querySelector('input[type="text"]').value;
+
+      // Fetch the tracking info from the server
+      fetch(`/trackings?q=${query}`)
+        .then(response => response.json())
+        .then(tracking => {
+          // Display the tracking details
+          displayTrackingDetails(tracking);
+        });
+    });
+
+    // Add event listener to the recent trackings list
+    const recentTrackingsList = document.getElementById('recent-trackings-list');
+    recentTrackingsList.addEventListener('click', (event) => {
+      if (event.target.tagName === 'LI') {
+        // Get the
